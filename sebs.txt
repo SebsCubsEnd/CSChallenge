@@ -1,0 +1,11 @@
+iytjnpur
+jlgnwfxa
+cunaczcq
+syvvbsod
+jxvltjxj
+iytjnpur,jlgnwfxa,8
+iytjnpur,cunaczcq,18
+jlgnwfxa,cunaczcq,4
+jlgnwfxa,syvvbsod,18
+cunaczcq,syvvbsod,10
+cunaczcq,jxvltjxj,11
