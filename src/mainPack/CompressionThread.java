@@ -72,8 +72,9 @@ public class CompressionThread implements Runnable{
 			int index1 = nodes.indexOf(connections.get(i)[0]);
 			int index2 = nodes.indexOf(connections.get(i)[1]);
 			int distance = Integer.parseInt(connections.get(i)[2]);
-			
+			//Given it's an undirected graph, matrix should be symmetric
 			adjMatrix[index1][index2] = distance;  
+			adjMatrix[index2][index1] = distance;  
 		}
 		
 		//perform compression
@@ -84,14 +85,16 @@ public class CompressionThread implements Runnable{
 			dos.write(numberOfNodes);
 			for(int i = 0;i<numberOfNodes;i++) {
 				for(int j = 0;j<numberOfNodes;j++) {
+					
 					dos.write(adjMatrix[i][j]);	
+					
 				}
 			}
+			
+			
 			dos.close();
 			
-			
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 		}
 		
