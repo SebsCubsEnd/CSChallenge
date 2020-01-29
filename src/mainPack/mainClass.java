@@ -1,8 +1,13 @@
 package mainPack;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Properties;
 
 
 public class MainClass {
@@ -12,8 +17,9 @@ public class MainClass {
 		BufferedReader objReader = new BufferedReader(new InputStreamReader(System.in));
 		String entrada[] = null;
 		int start = 0, stop = 0;
-		
-		
+		Properties prop = new Properties();
+		InputStream toRetrieveProperties = null;
+		resetProperties();
 		
 		//Always run code
 		while(true) {
@@ -62,7 +68,16 @@ public class MainClass {
 					}
 					break;
 				case '4':
-					//Show system info (To check how)
+					//Establish a properties file
+				try {
+					toRetrieveProperties = new FileInputStream("sysStat.properties");
+					prop.load(toRetrieveProperties);
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				System.out.println(prop.getProperty("sysStat"));
 					break;
 				case '5':
 					//Create a new test graph
@@ -80,6 +95,27 @@ public class MainClass {
 			
 		}
 
+	}
+	
+	public static void resetProperties() {
+		
+		String output = "No processes terminated \n";
+	
+    	try {
+			FileOutputStream setProperty = new FileOutputStream("sysStat.properties");
+			FileInputStream getProperty = new FileInputStream("sysStat.properties");
+			Properties sysProp = new Properties();
+			sysProp.load(getProperty);
+			getProperty.close();
+			
+			sysProp.setProperty("sysStat", output);
+			sysProp.store(setProperty, null);
+			setProperty.close();			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		
+	}
 	}
 
 }

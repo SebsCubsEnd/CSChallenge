@@ -13,8 +13,21 @@ public class BestRouteThread implements Runnable{
 	@Override
 	public void run() {
         MST minimumSpanningTClass = new MST(); 
+        
+        
+		adjMatrix = retrieveCompressed();
+        int graph[][] = adjMatrix;
+        
+                               
+        minimumSpanningTClass.primMST(graph); 		
+		
+	}
+	
+	
+	private int[][] retrieveCompressed() {
+		int[][] adjMatrixTemp = null;
 		//Retrieve adjacency matrix
-		try {
+		try {			
 			FileInputStream fileReader = new FileInputStream("compress");
 			InflaterInputStream iis = new InflaterInputStream(fileReader);
 			
@@ -26,22 +39,17 @@ public class BestRouteThread implements Runnable{
 			
 			iis.close();
 			int matrixFillCounter = 1;
-			adjMatrix = new int[inputData.get(0)][inputData.get(0)];
+			adjMatrixTemp = new int[inputData.get(0)][inputData.get(0)];
 			for(int i = 0; i<inputData.get(0);i++) {
 				for(int j = 0;j<inputData.get(0);j++) {
-					adjMatrix[i][j] = inputData.get(matrixFillCounter);
+					adjMatrixTemp[i][j] = inputData.get(matrixFillCounter);
 					matrixFillCounter++;
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
-        
-        int graph[][] = adjMatrix;
-                               
-        minimumSpanningTClass.primMST(graph); 		
-		
+		return adjMatrixTemp;
 	}
 
 }

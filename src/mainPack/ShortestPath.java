@@ -1,46 +1,26 @@
 package mainPack;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 public class ShortestPath {
 	// A utility function to find the vertex with minimum distance value, 
     // from the set of vertices not yet included in shortest path tree 
-    private int V; 
-    int minDistance(int dist[], Boolean sptSet[]) 
-    { 
-        // Initialize min value 
-        int min = Integer.MAX_VALUE, min_index = -1; 
-  
-        for (int v = 0; v < V; v++) 
-            if (sptSet[v] == false && dist[v] <= min) { 
-                min = dist[v]; 
-                min_index = v; 
-            } 
-  
-        return min_index; 
-    } 
-  
-    // A utility function to print the constructed distance array 
-    void printSolution(int dist[]) 
-    { 
-        System.out.println("Vertex \t\t Distance from Source"); 
-        for (int i = 0; i < V; i++) 
-            System.out.println(i + " \t\t " + dist[i]); 
-    } 
-  
-    // Function that implements Dijkstra's single source shortest path 
-    // algorithm for a graph represented using adjacency matrix 
-    // representation 
-    void dijkstra(int graph[][], int src) 
-    {
-    	V = graph.length;
-        int dist[] = new int[V]; // The output array. dist[i] will hold 
+    private int Vertices; 
+    
+    void dijkstra(int graph[][], int src) {
+    	Vertices = graph.length;
+        int dist[] = new int[Vertices]; // The output array. dist[i] will hold 
         // the shortest distance from src to i 
   
         // sptSet[i] will true if vertex i is included in shortest 
         // path tree or shortest distance from src to i is finalized 
-        Boolean sptSet[] = new Boolean[V]; 
+        Boolean sptSet[] = new Boolean[Vertices]; 
   
         // Initialize all distances as INFINITE and stpSet[] as false 
-        for (int i = 0; i < V; i++) { 
+        for (int i = 0; i < Vertices; i++) { 
             dist[i] = Integer.MAX_VALUE; 
             sptSet[i] = false; 
         } 
@@ -49,7 +29,7 @@ public class ShortestPath {
         dist[src] = 0; 
   
         // Find shortest path for all vertices 
-        for (int count = 0; count < V - 1; count++) { 
+        for (int count = 0; count < Vertices - 1; count++) { 
             // Pick the minimum distance vertex from the set of vertices 
             // not yet processed. u is always equal to src in first 
             // iteration. 
@@ -60,7 +40,7 @@ public class ShortestPath {
   
             // Update dist value of the adjacent vertices of the 
             // picked vertex. 
-            for (int v = 0; v < V; v++) 
+            for (int v = 0; v < Vertices; v++) 
   
                 // Update dist[v] only if is not in sptSet, there is an 
                 // edge from u to v, and total weight of path from src to 
@@ -72,5 +52,52 @@ public class ShortestPath {
         // print the constructed distance array 
         printSolution(dist); 
     } 
+    
+    
+    int minDistance(int dist[], Boolean sptSet[]) { 
+        // Initialize min value 
+        int min = Integer.MAX_VALUE, min_index = -1; 
+  
+        for (int v = 0; v < Vertices; v++) 
+            if (sptSet[v] == false && dist[v] <= min) { 
+                min = dist[v]; 
+                min_index = v; 
+            } 
+  
+        return min_index; 
+    } 
+  
+    // A utility function to print the constructed distance array 
+    void printSolution(int dist[]) { 
+    	String output = "Vertex \t\t Distance from Source \n";
+    	for (int i = 0; i < Vertices; i++) 
+            output = output + i + " \t\t " + dist[i] + "\n"; 
+    	
+    	try {
+			FileOutputStream setProperty = new FileOutputStream("sysStat.properties");
+			FileInputStream getProperty = new FileInputStream("sysStat.properties");
+			Properties sysProp = new Properties();
+			sysProp.load(getProperty);
+			getProperty.close();
+			sysProp.setProperty("sysStat", output);
+			sysProp.store(setProperty, null);
+			setProperty.close();			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    	
+    	
+    	
+//        System.out.println("Vertex \t\t Distance from Source"); 
+//        for (int i = 0; i < Vertices; i++) 
+//            System.out.println(i + " \t\t " + dist[i]); 
+    } 
+  
+    // Function that implements Dijkstra's single source shortest path 
+    // algorithm for a graph represented using adjacency matrix 
+    // representation 
+
  
 }
