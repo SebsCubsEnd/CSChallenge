@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 
-public class mainClass {
+public class MainClass {
 
 	public static void main(String[] args) {
 		// setup code
@@ -39,7 +39,9 @@ public class mainClass {
 					}
 					break;
 				case '2':
-					//Shortest route all rooms
+					BestRouteThread bestToAll = new BestRouteThread();
+					Thread bestRouteT = new Thread(bestToAll);
+					bestRouteT.start();	
 					break;
 				case '3':
 					System.out.println("Insert the index of starting and stop node separated by a space: \n");

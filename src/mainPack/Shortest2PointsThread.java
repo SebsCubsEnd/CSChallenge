@@ -27,7 +27,6 @@ public class Shortest2PointsThread implements Runnable{
 	@Override
 	public void run() {
 		//Retrieve adjacency matrix
-		
 		try {
 			FileInputStream fileReader = new FileInputStream("compress");
 			InflaterInputStream iis = new InflaterInputStream(fileReader);
@@ -52,12 +51,23 @@ public class Shortest2PointsThread implements Runnable{
 		}
 		
 		
-		dijkstra(adjMatrix,start,stop);
 		
-		System.out.println(minDistFinal[1][stop]);
+
+        
+        int graph[][] = adjMatrix;
+        ShortestPath shortestPathThread = new ShortestPath(); 
+        shortestPathThread.dijkstra(graph, start); 
+		
+		
+//		dijkstra(adjMatrix,start,stop);
+//		
+//		System.out.println(minDistFinal[1][stop]);
 		
 	}
 	
+	
+	
+	/*
 	private void dijkstra(int[][] graph, int start, int stop) {
 		
 		ArrayList<Integer> visited = new ArrayList<Integer>();
@@ -124,5 +134,5 @@ public class Shortest2PointsThread implements Runnable{
 	    return index;
 	}
 
-
+*/
 }
