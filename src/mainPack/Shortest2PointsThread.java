@@ -33,7 +33,7 @@ public class Shortest2PointsThread implements Runnable{
        
         int graph[][] = adjMatrix;
         ShortestPath shortestPathThread = new ShortestPath(); 
-        shortestPathThread.dijkstra(graph, start); 
+        shortestPathThread.dijkstra(graph, start,stop); 
 		
 		
 	}

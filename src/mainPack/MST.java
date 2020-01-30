@@ -26,6 +26,8 @@ public class MST {
     // parent[] 
     void printMST(int parent[], int graph[][]) 
     { 
+    	
+    	
         System.out.println("Edge \tWeight"); 
         for (int i = 1; i < V; i++) 
             System.out.println(parent[i] + " - " + i + "\t" + graph[i][parent[i]]); 
