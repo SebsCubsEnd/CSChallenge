@@ -18,7 +18,6 @@ public class BestRouteThread implements Runnable{
 		adjMatrix = retrieveCompressed();
         int graph[][] = adjMatrix;
         
-                               
         minimumSpanningTClass.primMST(graph); 		
 		
 	}
